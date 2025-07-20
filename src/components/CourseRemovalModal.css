@@ -1,0 +1,86 @@
+/* CourseRemovalModal.css */
+
+.removal-modal {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    max-width: 480px;
+    width: 90%;
+    animation: slideIn 0.3s ease-out;
+}
+
+.removal-modal .modal-body {
+    padding: 0 24px;
+    text-align: center;
+}
+
+.warning-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.removal-modal .course-info {
+    margin-bottom: 24px;
+    padding: 16px;
+    background: #fef2f2;
+    border-radius: 8px;
+    border: 1px solid #fecaca;
+}
+
+.removal-modal .course-info h3 {
+    margin: 0 0 8px 0;
+    color: #1f2937;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.removal-modal .course-code {
+    margin: 0 0 12px 0;
+    color: #6b7280;
+    font-family: 'Courier New', monospace;
+    font-weight: 500;
+}
+
+.removal-modal .schedule-info {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.removal-modal .schedule-time {
+    background: #dc2626;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.removal-modal .schedule-label {
+    color: #dc2626;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 0;
+}
+
+.warning-text {
+    color: #374151;
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+.btn-remove {
+    background-color: #dc2626;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-remove:hover {
+    background-color: #b91c1c;
+}

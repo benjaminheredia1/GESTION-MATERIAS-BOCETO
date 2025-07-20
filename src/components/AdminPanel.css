@@ -1,0 +1,690 @@
+/* AdminPanel.css */
+
+.admin-panel {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 24px;
+    margin-top: 20px;
+}
+
+.admin-header {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 6px solid #3b82f6;
+}
+
+.admin-title h1 {
+    margin: 0 0 8px 0;
+    color: #1f2937;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.admin-title p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 16px;
+}
+
+.admin-navigation {
+    display: flex;
+    gap: 12px;
+}
+
+.nav-btn {
+    padding: 12px 24px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    background: white;
+    color: #374151;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-btn:hover {
+    border-color: #3b82f6;
+    color: #3b82f6;
+}
+
+.nav-btn.active {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: white;
+}
+
+.nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.nav-btn:disabled:hover {
+    border-color: #e5e7eb;
+    color: #374151;
+}
+
+
+/* Filtros */
+
+.filters-section {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 150px;
+}
+
+.filter-group label {
+    font-weight: 600;
+    color: #374151;
+    font-size: 14px;
+}
+
+.filter-group select {
+    padding: 8px 12px;
+    border: 2px solid #e5e7eb;
+    border-radius: 6px;
+    background: white;
+    color: #374151;
+    font-size: 14px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.filter-group select:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+
+/* Layout Principal */
+
+.admin-content {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+
+/* Vista General */
+
+.overview-layout {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    min-height: 600px;
+}
+
+.search-section {
+    background: #f8fafc;
+    border-right: 1px solid #e5e7eb;
+    padding: 24px;
+}
+
+.schedule-section {
+    padding: 24px;
+}
+
+
+/* Vista de Estudiante */
+
+.student-layout {
+    padding: 0;
+}
+
+.student-header {
+    background: linear-gradient(135deg, #1e293b 0%, #374151 100%);
+    color: white;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.back-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.student-info h2 {
+    margin: 0 0 8px 0;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.student-info p {
+    margin: 0 0 12px 0;
+    opacity: 0.9;
+}
+
+.student-stats {
+    display: flex;
+    gap: 24px;
+}
+
+.student-stats span {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.student-curriculum {
+    padding: 24px;
+    background: #f8fafc;
+}
+
+
+/* ===== ESTILOS PARA STUDENT SEARCH ===== */
+
+.student-search h3 {
+    margin: 0 0 20px 0;
+    color: #1f2937;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.search-input-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 40px 12px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+.search-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6b7280;
+    font-size: 16px;
+}
+
+.search-results {
+    margin-top: 16px;
+}
+
+.results-header {
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.students-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.student-item {
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.student-item:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+}
+
+.student-main-info {
+    margin-bottom: 12px;
+}
+
+.student-name {
+    font-weight: 700;
+    color: #1f2937;
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.student-code {
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.student-status {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.student-academic-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+}
+
+.info-row .label {
+    color: #6b7280;
+}
+
+.info-row .value {
+    font-weight: 600;
+    color: #374151;
+}
+
+.info-row .value.gpa {
+    font-weight: 700;
+}
+
+.student-progress {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 8px;
+}
+
+.progress-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.progress-item.passed .progress-number {
+    color: #10b981;
+}
+
+.progress-item.failed .progress-number {
+    color: #ef4444;
+}
+
+.progress-number {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.progress-label {
+    font-size: 11px;
+    color: #6b7280;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.click-indicator {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    font-size: 12px;
+    color: #3b82f6;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.student-item:hover .click-indicator {
+    opacity: 1;
+}
+
+.no-results {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6b7280;
+}
+
+.no-results-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.no-results h4 {
+    margin: 0 0 8px 0;
+    color: #374151;
+}
+
+.no-results p,
+.no-results small {
+    margin: 4px 0;
+}
+
+
+/* ===== ESTILOS PARA SCHEDULE OVERVIEW ===== */
+
+.schedule-overview {
+    height: 100%;
+}
+
+.overview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.overview-header h3 {
+    margin: 0;
+    color: #1f2937;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.overview-stats {
+    display: flex;
+    gap: 24px;
+}
+
+.stat-item {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.stat-item strong {
+    color: #1f2937;
+    font-size: 16px;
+}
+
+.time-slots-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+
+.time-slot-tab {
+    padding: 12px 20px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    background: white;
+    color: #374151;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 120px;
+}
+
+.time-slot-tab:hover {
+    border-color: #3b82f6;
+    color: #3b82f6;
+}
+
+.time-slot-tab.active {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: white;
+}
+
+.time-slot-tab small {
+    font-size: 11px;
+    opacity: 0.8;
+    margin-top: 2px;
+}
+
+.courses-schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.course-schedule-card {
+    background: #f8fafc;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.2s;
+}
+
+.course-schedule-card:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+}
+
+.course-header {
+    margin-bottom: 16px;
+}
+
+.course-title {
+    margin-bottom: 8px;
+}
+
+.course-title h4 {
+    margin: 0 0 4px 0;
+    color: #1f2937;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.course-code {
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.course-info {
+    display: flex;
+    gap: 16px;
+}
+
+.credits,
+.semester {
+    background: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.enrollment-status {
+    margin-bottom: 16px;
+}
+
+.enrollment-bar {
+    width: 100%;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.enrollment-fill {
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+.enrollment-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+}
+
+.status-text {
+    font-weight: 600;
+}
+
+.schedule-sessions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.session-item {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 12px;
+}
+
+.session-time {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.session-time .day {
+    font-weight: 700;
+    color: #1f2937;
+    min-width: 70px;
+}
+
+.session-time .time {
+    color: #374151;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.time-slot-badge {
+    background: #3b82f6;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.session-details {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.room,
+.professor {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.no-sessions {
+    text-align: center;
+    padding: 20px;
+    color: #6b7280;
+    font-style: italic;
+}
+
+.no-courses {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6b7280;
+}
+
+.no-courses-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+}
+
+.no-courses h4 {
+    margin: 0 0 8px 0;
+    color: #374151;
+}
+
+
+/* Responsive */
+
+@media (max-width: 1024px) {
+    .overview-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+    }
+    .search-section {
+        border-right: none;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    .courses-schedule-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-panel {
+        padding: 16px;
+    }
+    .admin-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+        text-align: center;
+    }
+    .admin-navigation {
+        justify-content: center;
+    }
+    .filters-section {
+        flex-direction: column;
+        gap: 16px;
+    }
+    .student-header {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        gap: 16px;
+    }
+    .student-stats {
+        justify-content: center;
+    }
+    .time-slots-tabs {
+        justify-content: center;
+    }
+    .student-academic-info {
+        grid-template-columns: 1fr;
+    }
+}
