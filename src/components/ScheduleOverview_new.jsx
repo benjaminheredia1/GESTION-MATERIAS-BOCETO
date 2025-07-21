@@ -1,8 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { coursesData } from '../data/courses.js';
-import './ScheduleOverview.css';
 
-const ScheduleOverview = ({ enrollmentMode, selectedStudent, onCourseEnroll }) => {
+const ScheduleOverview = ({ enrollmentMode, selectedStudent }) => {
     const [selectedTimeSlot, setSelectedTimeSlot] = useState('');
     const [selectedSemester, setSelectedSemester] = useState('');
     const [selectedModality, setSelectedModality] = useState('');
@@ -74,9 +73,9 @@ const ScheduleOverview = ({ enrollmentMode, selectedStudent, onCourseEnroll }) =
 
         // Filtrar las materias según los filtros aplicados
         return availableCourses.filter(course => {
-            const matchesTimeSlot = !selectedTimeSlot || (course.schedule && course.schedule[selectedTimeSlot]);
+            const matchesTimeSlot = !selectedTimeSlot || course.schedule[selectedTimeSlot];
             const matchesModality = !selectedModality || 
-                (course.schedule && Object.values(course.schedule).flat().some(session => session.modalidad === selectedModality));
+                Object.values(course.schedule).flat().some(session => session.modalidad === selectedModality);
             const matchesSearch = !searchTerm || 
                 course.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 course.code.toLowerCase().includes(searchTerm.toLowerCase());
@@ -98,15 +97,15 @@ const ScheduleOverview = ({ enrollmentMode, selectedStudent, onCourseEnroll }) =
     // Filtros para la vista normal
     const filteredCourses = useMemo(() => {
         return courses.filter(course => {
-            const matchesTimeSlot = !selectedTimeSlot || (course.schedule && course.schedule[selectedTimeSlot]);
+            const matchesTimeSlot = !selectedTimeSlot || course.schedule[selectedTimeSlot];
             const matchesSemester = !selectedSemester || course.semester === parseInt(selectedSemester);
             const matchesModality = !selectedModality || 
-                (course.schedule && Object.values(course.schedule).flat().some(session => session.modalidad === selectedModality));
+                Object.values(course.schedule).flat().some(session => session.modalidad === selectedModality);
             const matchesSearch = !searchTerm || 
                 course.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 course.code.toLowerCase().includes(searchTerm.toLowerCase());
             const matchesAvailability = !showOnlyAvailable || 
-                (course.schedule && Object.values(course.schedule).flat().some(session => session.available > 0));
+                Object.values(course.schedule).flat().some(session => session.available > 0);
             const matchesEnabled = !hideDisabled || course.enabled !== false;
 
             return matchesTimeSlot && matchesSemester && matchesModality && 
@@ -116,29 +115,22 @@ const ScheduleOverview = ({ enrollmentMode, selectedStudent, onCourseEnroll }) =
 
     // Estadísticas de resumen
     const uniqueTimeSlots = new Set(
-        filteredCourses.flatMap(course => course.schedule ? Object.keys(course.schedule) : [])
+        filteredCourses.flatMap(course => Object.keys(course.schedule))
     );
     const uniqueModalities = new Set(
         filteredCourses.flatMap(course => 
-            course.schedule ? Object.values(course.schedule).flat().map(session => session.modalidad) : []
+            Object.values(course.schedule).flat().map(session => session.modalidad)
         )
     );
     const totalAvailability = filteredCourses.reduce((total, course) => 
-        total + (course.schedule ? Object.values(course.schedule).flat().reduce((sum, session) => 
-            sum + (session.available || 0), 0) : 0), 0
+        total + Object.values(course.schedule).flat().reduce((sum, session) => 
+            sum + (session.available || 0), 0), 0
     );
 
     // Función para manejar selección de materia para inscripción
     const handleCourseSelect = (course) => {
-        if (onCourseEnroll) {
-            onCourseEnroll(course);
-            // Mostrar confirmación visual
-            console.log('Materia agregada al carrito:', course);
-        } else {
-            // Fallback para cuando no hay función de inscripción
-            console.log('Materia seleccionada:', course);
-            alert(`Ver detalles de: ${course.name} (${course.code})`);
-        }
+        console.log('Materia seleccionada para inscripción:', course);
+        alert(`Inscribiendo en: ${course.name} (${course.code})`);
     };
 
     return (
@@ -220,7 +212,7 @@ const ScheduleOverview = ({ enrollmentMode, selectedStudent, onCourseEnroll }) =
                                 </div>
 
                                 <div className="course-schedules">
-                                    {course.schedule && Object.entries(course.schedule).map(([timeSlot, sessions]) => 
+                                    {Object.entries(course.schedule).map(([timeSlot, sessions]) => 
                                         sessions.map((session, index) => (
                                             <div key={`${timeSlot}-${index}`} className="schedule-option">
                                                 <span className="time">{session.time}</span>
@@ -355,10 +347,10 @@ const ScheduleOverview = ({ enrollmentMode, selectedStudent, onCourseEnroll }) =
                     <div className="courses-schedule-grid">
                         {filteredCourses.map(course => {
                             const scheduleEntries = selectedTimeSlot 
-                                ? (course.schedule && course.schedule[selectedTimeSlot] ? course.schedule[selectedTimeSlot] : [])
-                                : (course.schedule ? Object.entries(course.schedule).flatMap(([timeSlot, sessions]) => 
+                                ? (course.schedule[selectedTimeSlot] || [])
+                                : Object.entries(course.schedule).flatMap(([timeSlot, sessions]) => 
                                     sessions.map(session => ({ ...session, timeSlot }))
-                                  ) : []);
+                                  );
 
                             if (selectedTimeSlot && scheduleEntries.length === 0) return null;
 
@@ -372,8 +364,7 @@ const ScheduleOverview = ({ enrollmentMode, selectedStudent, onCourseEnroll }) =
                                         <span className="course-code">{course.code}</span>
                                     </div>
 
-                                    <div className="course-info">
-                                        <span>📚 {course.credits || 'N/A'} créditos</span>
+                                    <div className="course-badge">
                                         <span>📅 Módulo {course.semester}</span>
                                         {course.enrolledStudents && course.maxCapacity && (
                                             <span>👥 {course.enrolledStudents}/{course.maxCapacity}</span>

@@ -230,3 +230,22 @@ body {
   overflow: visible;
   /* Asegura que las flechas no se corten */
 }
+/* Contenedor principal del encabezado */
+.course-header {
+  display: flex;
+  justify-content: space-between; /* Empuja los elementos a los extremos */
+  align-items: center; /* Los alinea verticalmente en el centro */
+  width: 100%;
+  margin-bottom: 1rem; /* Espacio antes de la lista de sesiones */
+}
+
+/* Estilos para el nuevo badge rojo */
+.course-badge {
+  background-color: #e53e3e; /* Un tono de rojo */
+  color: white;
+  padding: 6px 14px;
+  border-radius: 16px; /* Para que sea redondeado */
+  font-size: 0.85rem;
+  font-weight: bold;
+  white-space: nowrap; /* Evita que el texto se parta en dos líneas */
+}

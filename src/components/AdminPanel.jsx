@@ -2,11 +2,19 @@ import React, { useState } from 'react';
 import StudentSearch from './StudentSearch';
 import ScheduleOverview from './ScheduleOverview';
 import CurriculumGrid from './CurriculumGrid';
+import CurriculumPensum from './CurriculumPensum';
+import EnrollmentReminder from './EnrollmentReminder';
+import ModeSelectionModal from './ModeSelectionModal';
 import './AdminPanel.css';
 
 const AdminPanel = ({ onBackToStudent }) => {
-    const [currentView, setCurrentView] = useState('overview'); // 'overview' | 'student'
+    const [currentView, setCurrentView] = useState('overview'); // 'overview' | 'student' | 'enrollment' | 'pensum'
     const [selectedStudent, setSelectedStudent] = useState(null);
+    const [enrollmentMode, setEnrollmentMode] = useState(null); // 'map' | 'panel'
+    const [viewMode, setViewMode] = useState(null); // 'visual' | 'administrative'
+    const [showModeModal, setShowModeModal] = useState(false);
+    const [pendingStudent, setPendingStudent] = useState(null);
+    const [enrolledCourses, setEnrolledCourses] = useState([]); // Materias seleccionadas para inscripción
     const [activeFilters, setActiveFilters] = useState({
         semester: 'all',
         courseType: 'all',
@@ -14,14 +22,59 @@ const AdminPanel = ({ onBackToStudent }) => {
         status: 'all'
     });
 
-    const handleStudentSelect = (student) => {
-        setSelectedStudent(student);
-        setCurrentView('student');
+    const handleStudentSelect = (student, mode = null) => {
+        if (mode) {
+            // Si ya se especificó un modo (desde otro componente)
+            setSelectedStudent(student);
+            setViewMode(mode);
+            setEnrollmentMode(mode);
+            setCurrentView(mode === 'visual' ? 'enrollment' : 'pensum');
+            setEnrolledCourses([]);
+        } else {
+            // Mostrar modal para seleccionar modo
+            setPendingStudent(student);
+            setShowModeModal(true);
+        }
+    };
+
+    const handleModeSelect = (mode) => {
+        if (pendingStudent) {
+            setSelectedStudent(pendingStudent);
+            setViewMode(mode);
+            
+            // En ambos modos nos quedamos en la vista general
+            // Solo cambia el comportamiento del pensum
+            if (mode === 'visual') {
+                setEnrollmentMode('map');
+            } else if (mode === 'administrative') {
+                setEnrollmentMode('administrative');
+            }
+            
+            setPendingStudent(null);
+            setEnrolledCourses([]);
+        }
     };
 
     const handleBackToOverview = () => {
         setCurrentView('overview');
         setSelectedStudent(null);
+        setEnrollmentMode(null);
+        setViewMode(null);
+        setEnrolledCourses([]);
+    };
+
+    const handleCourseEnroll = (course) => {
+        setEnrolledCourses(prev => {
+            // Verificar si la materia ya está inscrita
+            if (prev.find(c => c.id === course.id)) {
+                return prev; // No agregar duplicados
+            }
+            return [...prev, course];
+        });
+    };
+
+    const handleRemoveCourse = (courseId) => {
+        setEnrolledCourses(prev => prev.filter(course => course.id !== courseId));
     };
 
     return (
@@ -31,6 +84,19 @@ const AdminPanel = ({ onBackToStudent }) => {
                 <div className="admin-title">
                     <h1>Panel de Administración Académica</h1>
                     <p>Sistema de Gestión de Inscripciones y Pensums</p>
+                    {enrollmentMode === 'administrative' && selectedStudent && (
+                        <div style={{ 
+                            marginTop: '8px', 
+                            background: '#10b981', 
+                            color: 'white', 
+                            padding: '4px 12px', 
+                            borderRadius: '6px', 
+                            fontSize: '14px',
+                            display: 'inline-block'
+                        }}>
+                            Modo Administrativo - {selectedStudent.name} | Materias inscritas: {enrolledCourses.length}
+                        </div>
+                    )}
                 </div>
                 
                 <div className="admin-navigation">
@@ -129,7 +195,59 @@ const AdminPanel = ({ onBackToStudent }) => {
 
                         {/* Vista General de Horarios */}
                         <div className="schedule-section">
-                            <ScheduleOverview filters={activeFilters} />
+                            <ScheduleOverview 
+                                filters={activeFilters} 
+                                selectedStudent={selectedStudent}
+                            />
+                        </div>
+
+                        {/* Pensum de la carrera */}
+                        <div className="pensum-section">
+                            <CurriculumPensum 
+                                selectedStudent={selectedStudent} 
+                                enrollmentMode={enrollmentMode}
+                                onCourseEnroll={handleCourseEnroll}
+                            />
+                        </div>
+                    </div>
+                ) : currentView === 'enrollment' ? (
+                    <div className="enrollment-layout">
+                        <div className="enrollment-header">
+                            <button className="back-btn" onClick={handleBackToOverview}>
+                                ← Volver a Vista General
+                            </button>
+                            <h2>
+                                🗺️ Vista Visual de Inscripción - {selectedStudent?.name}
+                            </h2>
+                        </div>
+
+                        <div className="map-enrollment">
+                            <CurriculumGrid 
+                                studentData={selectedStudent}
+                                isAdminMode={true}
+                                enrollmentMode={true}
+                                onCourseEnroll={handleCourseEnroll}
+                            />
+                        </div>
+                    </div>
+                ) : currentView === 'pensum' ? (
+                    <div className="pensum-layout">
+                        <div className="pensum-header-section">
+                            <button className="back-btn" onClick={handleBackToOverview}>
+                                ← Volver a Vista General
+                            </button>
+                            <h2>
+                                📋 Vista Administrativa - {selectedStudent?.name}
+                            </h2>
+                            <div className="student-summary">
+                                <span>Código: {selectedStudent?.code}</span>
+                                <span>Semestre: {selectedStudent?.semester}</span>
+                                <span>Avance: {selectedStudent?.progress}%</span>
+                            </div>
+                        </div>
+
+                        <div className="administrative-pensum">
+                            <CurriculumPensum selectedStudent={selectedStudent} />
                         </div>
                     </div>
                 ) : (
@@ -157,9 +275,31 @@ const AdminPanel = ({ onBackToStudent }) => {
                                 isAdminMode={true}
                             />
                         </div>
+
+                        {/* Pensum personalizado del estudiante */}
+                        <div className="student-pensum">
+                            <CurriculumPensum selectedStudent={selectedStudent} />
+                        </div>
                     </div>
                 )}
             </div>
+
+            {/* Recordatorio de materias seleccionadas - visible en modo inscripción y administrativo */}
+            {(currentView === 'enrollment' || enrollmentMode === 'administrative') && enrolledCourses.length > 0 && (
+                <EnrollmentReminder
+                    enrolledCourses={enrolledCourses}
+                    onRemoveCourse={handleRemoveCourse}
+                    selectedStudent={selectedStudent}
+                />
+            )}
+
+            {/* Modal de selección de modo */}
+            <ModeSelectionModal
+                isOpen={showModeModal}
+                onClose={() => setShowModeModal(false)}
+                onSelectMode={handleModeSelect}
+                student={pendingStudent}
+            />
         </div>
     );
 };

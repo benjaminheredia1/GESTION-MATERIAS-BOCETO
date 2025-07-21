@@ -1,0 +1,524 @@
+/* ScheduleOverview.css */
+
+.schedule-overview {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    min-height: 400px;
+}
+
+
+/* === VISTA DE MATERIAS DISPONIBLES === */
+
+.available-courses-view {
+    padding: 0;
+}
+
+.student-info-header {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    border-radius: 12px;
+    padding: 20px;
+    color: white;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.1);
+}
+
+.student-info-header h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.student-info-header p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 14px;
+}
+
+.available-courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.course-card.available {
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+    background: white;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.course-card.available:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+    transform: translateY(-2px);
+}
+
+.course-card.available.prerequisites-missing {
+    border-color: #ef4444;
+    background: #fef2f2;
+}
+
+.course-card.available.prerequisites-missing:hover {
+    border-color: #dc2626;
+    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.15);
+}
+
+.course-card .course-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.course-card .course-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.course-card .course-code {
+    background: #f3f4f6;
+    color: #374151;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: monospace;
+}
+
+.course-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.course-info span {
+    font-size: 13px;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.course-schedules {
+    margin-bottom: 16px;
+}
+
+.schedule-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: #f8fafc;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    font-size: 13px;
+}
+
+.schedule-option .time {
+    font-weight: 500;
+    color: #374151;
+    font-family: monospace;
+}
+
+.schedule-option .modality {
+    color: #6b7280;
+}
+
+.schedule-option .availability {
+    color: #059669;
+    font-weight: 500;
+}
+
+.enroll-button-container {
+    margin-top: 16px;
+}
+
+.enroll-button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.enroll-button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.enroll-button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+
+/* === VISTA NORMAL === */
+
+.overview-header {
+    margin-bottom: 24px;
+}
+
+.overview-header h3 {
+    margin: 0 0 16px 0;
+    color: #1f2937;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.overview-stats {
+    display: flex;
+    gap: 24px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.stat-item strong {
+    color: #1f2937;
+    font-size: 16px;
+}
+
+
+/* Estilos para información del estudiante */
+
+.student-info-header {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 16px;
+    border-left: 4px solid #3b82f6;
+}
+
+.student-details {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.student-code,
+.student-semester,
+.student-gpa {
+    font-size: 14px;
+    color: #374151;
+    font-weight: 500;
+}
+
+.student-code {
+    font-family: monospace;
+    background: #e5e7eb;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.student-gpa {
+    color: #059669;
+    font-weight: 600;
+}
+
+.enrollment-status {
+    display: flex;
+    gap: 16px;
+}
+
+.available-courses {
+    color: #059669;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.blocked-courses {
+    color: #dc2626;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+
+/* Estilos para las pestañas de horarios */
+
+.time-slots-tabs {
+    display: flex;
+    border-bottom: 2px solid #f3f4f6;
+    margin-bottom: 20px;
+    gap: 4px;
+}
+
+.time-slot-tab {
+    padding: 12px 20px;
+    border: none;
+    background: transparent;
+    color: #6b7280;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    font-size: 14px;
+}
+
+.time-slot-tab:hover {
+    color: #3b82f6;
+    background: #f8fafc;
+}
+
+.time-slot-tab.active {
+    color: #3b82f6;
+    border-bottom-color: #3b82f6;
+    background: #f8fafc;
+}
+
+
+/* Estilos para las tarjetas de materias */
+
+.courses-grid {
+    display: grid;
+    gap: 16px;
+}
+
+.course-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 20px;
+    background: white;
+    transition: all 0.2s;
+}
+
+.course-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: #d1d5db;
+}
+
+.course-card.disabled {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    opacity: 0.7;
+}
+
+.course-card.disabled .course-title {
+    color: #6b7280;
+}
+
+.course-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.course-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+}
+
+.course-code {
+    font-size: 14px;
+    color: #6b7280;
+    font-family: monospace;
+    background: #f3f4f6;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.course-info {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.course-info span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.prerequisite-warning {
+    background: #fef3c7;
+    border: 1px solid #f59e0b;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    color: #92400e;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.prerequisite-warning::before {
+    content: "⚠️ ";
+}
+
+.schedule-sessions {
+    margin-top: 16px;
+}
+
+.schedule-sessions h4 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: #374151;
+    font-weight: 600;
+}
+
+.session-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: #f8fafc;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    border-left: 3px solid #3b82f6;
+}
+
+.session-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.session-time {
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 14px;
+}
+
+.session-modality {
+    font-size: 12px;
+    color: #6b7280;
+    background: #e5e7eb;
+    padding: 1px 6px;
+    border-radius: 4px;
+    width: fit-content;
+}
+
+.session-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.room,
+.professor {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.availability {
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+}
+
+.availability.high {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.availability.medium {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.availability.low {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.availability.full {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.no-sessions {
+    text-align: center;
+    padding: 20px;
+    color: #6b7280;
+    font-style: italic;
+}
+
+.no-courses {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6b7280;
+}
+
+.no-courses-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.no-courses h4 {
+    margin: 0 0 8px 0;
+    color: #374151;
+}
+
+.no-courses p {
+    margin: 0;
+    font-size: 14px;
+}
+
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .schedule-overview {
+        padding: 16px;
+    }
+    .student-details {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .enrollment-status {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .time-slots-tabs {
+        flex-wrap: wrap;
+    }
+    .time-slot-tab {
+        flex: 1;
+        min-width: 120px;
+    }
+    .course-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .course-info {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    .session-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .session-details {
+        align-items: flex-start;
+        width: 100%;
+    }
+}

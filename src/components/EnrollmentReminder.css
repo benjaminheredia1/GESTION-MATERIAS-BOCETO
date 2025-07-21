@@ -1,0 +1,296 @@
+/* EnrollmentReminder.css */
+
+.enrollment-reminder {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 350px;
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e5e7eb;
+    z-index: 1000;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    max-height: 80vh;
+    overflow: hidden;
+}
+
+.enrollment-reminder.minimized {
+    height: auto;
+    max-height: none;
+}
+
+.reminder-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    border-radius: 16px 16px 0 0;
+    color: white;
+}
+
+.reminder-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.title-icon {
+    font-size: 16px;
+}
+
+.course-count {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    min-width: 20px;
+    text-align: center;
+}
+
+.reminder-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.minimize-btn,
+.close-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: background-color 0.2s;
+}
+
+.minimize-btn:hover,
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.reminder-content {
+    padding: 16px 20px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.student-info {
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    border-left: 3px solid #3b82f6;
+}
+
+.student-name {
+    display: block;
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+.student-code {
+    display: block;
+    color: #6b7280;
+    font-size: 12px;
+    font-family: monospace;
+}
+
+.courses-summary {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    padding: 12px;
+    background: #f0f9ff;
+    border-radius: 8px;
+    border: 1px solid #0ea5e9;
+}
+
+.summary-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.summary-label {
+    font-size: 11px;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+}
+
+.summary-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0ea5e9;
+}
+
+.courses-list {
+    margin-bottom: 16px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.course-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    transition: all 0.2s;
+}
+
+.course-item:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
+}
+
+.course-info {
+    flex: 1;
+}
+
+.course-name {
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 13px;
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+.course-details {
+    display: flex;
+    gap: 12px;
+    font-size: 11px;
+    color: #6b7280;
+}
+
+.course-code {
+    background: #f3f4f6;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-weight: 500;
+}
+
+.remove-course-btn {
+    background: #fee2e2;
+    color: #dc2626;
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.remove-course-btn:hover {
+    background: #fecaca;
+    transform: scale(1.1);
+}
+
+.reminder-actions {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 16px;
+}
+
+.process-enrollment-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.process-enrollment-btn:hover {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+
+/* Scrollbar personalizado */
+
+.reminder-content::-webkit-scrollbar,
+.courses-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.reminder-content::-webkit-scrollbar-track,
+.courses-list::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 3px;
+}
+
+.reminder-content::-webkit-scrollbar-thumb,
+.courses-list::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+.reminder-content::-webkit-scrollbar-thumb:hover,
+.courses-list::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+
+/* Animaciones */
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.enrollment-reminder {
+    animation: slideIn 0.3s ease-out;
+}
+
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .enrollment-reminder {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        width: auto;
+        max-width: none;
+    }
+}

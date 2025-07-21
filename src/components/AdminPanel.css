@@ -688,3 +688,96 @@
         grid-template-columns: 1fr;
     }
 }
+
+
+/* Estilos para las secciones de pensum */
+
+.pensum-section,
+.student-pensum {
+    margin-top: 24px;
+}
+
+.pensum-section {
+    grid-column: 1 / -1;
+    /* Ocupa todo el ancho disponible */
+}
+
+
+/* Layout específico para la vista general */
+
+.overview-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.overview-layout .pensum-section {
+    grid-column: 1 / -1;
+    margin-top: 24px;
+}
+
+
+/* Layout para la vista del estudiante */
+
+.student-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+
+/* Layout para la vista de pensum administrativo */
+
+.pensum-layout {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.pensum-header-section {
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.pensum-header-section h2 {
+    margin: 16px 0 12px 0;
+    color: #1f2937;
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.student-summary {
+    display: flex;
+    gap: 20px;
+    margin-top: 12px;
+}
+
+.student-summary span {
+    background: #f3f4f6;
+    color: #374151;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.administrative-pensum {
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .overview-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .student-summary {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
