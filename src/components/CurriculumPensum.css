@@ -180,11 +180,15 @@
     background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
     border: 1px solid #e5e7eb;
     border-radius: 12px;
-    padding: 16px 20px;
+    padding: 12px 16px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
     cursor: pointer;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .course-item::before {
@@ -214,33 +218,29 @@
 }
 
 .course-name {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     color: #1f2937;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
     line-height: 1.3;
 }
 
-.course-credits {
+.course-code {
     font-size: 12px;
+    font-weight: 700;
     color: #6b7280;
-    font-weight: 500;
-}
-
-.course-module {
-    font-size: 12px;
-    color: #6b7280;
-    font-weight: 500;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .course-status {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    border: 2px solid white;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-align: center;
 }
 
 
@@ -412,4 +412,74 @@
 .enroll-btn-pensum:active {
     transform: translateY(0);
     box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+}
+
+.enroll-btn-pensum.enrolling {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    pointer-events: none;
+}
+
+.enroll-btn-pensum:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+
+
+/* Estilos mejorados para estados aprobado/reprobado */
+
+.pensum-course-card.passed {
+    background: #dcfce7 !important;
+    border-color: #22c55e !important;
+    border-width: 2px;
+    box-shadow: 0 2px 8px rgba(34, 197, 94, 0.2);
+}
+
+.pensum-course-card.failed {
+    background: #fee2e2 !important;
+    border-color: #ef4444 !important;
+    border-width: 2px;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2);
+}
+
+.pensum-course-card.enrolled {
+    background: #dbeafe !important;
+    border-color: #3b82f6 !important;
+    border-width: 2px;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+}
+
+.pensum-course-card.available {
+    background: white !important;
+    border-color: #6b7280 !important;
+    border-width: 1px;
+}
+
+.pensum-course-card.locked {
+    background: #f3f4f6 !important;
+    border-color: #d1d5db !important;
+    border-width: 1px;
+    opacity: 0.7;
+}
+
+
+/* Iconos para estados */
+
+.pensum-course-card.passed .course-status::before {
+    content: "✓ ";
+    color: #22c55e;
+    font-weight: bold;
+}
+
+.pensum-course-card.failed .course-status::before {
+    content: "✗ ";
+    color: #ef4444;
+    font-weight: bold;
+}
+
+.pensum-course-card.enrolled .course-status::before {
+    content: "📚 ";
+}
+
+.pensum-course-card.locked .course-status::before {
+    content: "🔒 ";
 }

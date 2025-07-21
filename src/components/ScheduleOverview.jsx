@@ -9,9 +9,10 @@ const ScheduleOverview = ({ enrollmentMode, selectedStudent, onCourseEnroll }) =
     const [searchTerm, setSearchTerm] = useState('');
     const [showOnlyAvailable, setShowOnlyAvailable] = useState(false);
     const [hideDisabled, setHideDisabled] = useState(false);
+    const [enrollingCourse, setEnrollingCourse] = useState(null);
 
-    // Determinar si estamos en modo panel (vista de materias disponibles)
-    const isPanelMode = enrollmentMode === 'panel' && selectedStudent;
+    // Determinar si estamos en modo panel o administrativo (vista de materias disponibles)
+    const isPanelMode = (enrollmentMode === 'panel' || enrollmentMode === 'administrative') && selectedStudent;
 
     // Función para obtener materias disponibles para un estudiante específico
     const getAvailableCourses = () => {
@@ -235,14 +236,22 @@ const ScheduleOverview = ({ enrollmentMode, selectedStudent, onCourseEnroll }) =
 
                                 <div className="enroll-button-container">
                                     <button 
-                                        className="enroll-button"
-                                        disabled={course.prerequisitesMet === false}
+                                        className={`enroll-button ${enrollingCourse === course.id ? 'enrolling' : ''}`}
+                                        disabled={course.prerequisitesMet === false || enrollingCourse === course.id}
                                         onClick={(e) => {
                                             e.stopPropagation();
+                                            setEnrollingCourse(course.id);
                                             handleCourseSelect(course);
+                                            // Resetear después de un momento
+                                            setTimeout(() => setEnrollingCourse(null), 1000);
                                         }}
                                     >
-                                        {course.prerequisitesMet === false ? 'Prerrequisitos faltantes' : 'Matricular'}
+                                        {course.prerequisitesMet === false 
+                                            ? 'Prerrequisitos faltantes' 
+                                            : enrollingCourse === course.id 
+                                                ? '✓ Inscrito'
+                                                : (enrollmentMode === 'administrative' ? '➕ Inscribir' : 'Matricular')
+                                        }
                                     </button>
                                 </div>
                             </div>

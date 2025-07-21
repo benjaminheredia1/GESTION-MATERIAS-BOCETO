@@ -42,17 +42,19 @@ const AdminPanel = ({ onBackToStudent }) => {
             setSelectedStudent(pendingStudent);
             setViewMode(mode);
             
-            // En ambos modos nos quedamos en la vista general
-            // Solo cambia el comportamiento del pensum
+            // Configurar vista y modo según la selección
             if (mode === 'visual') {
                 setEnrollmentMode('map');
+                setCurrentView('enrollment'); // Redirigir a vista de inscripción
             } else if (mode === 'administrative') {
                 setEnrollmentMode('administrative');
+                setCurrentView('overview'); // Mantener en vista general con pensum administrativo
             }
             
             setPendingStudent(null);
             setEnrolledCourses([]);
         }
+        setShowModeModal(false); // Asegurar que el modal se cierre
     };
 
     const handleBackToOverview = () => {
@@ -114,16 +116,39 @@ const AdminPanel = ({ onBackToStudent }) => {
                         👤 Estudiante
                     </button>
                     <button 
-                        className="nav-btn"
-                        onClick={onBackToStudent}
+                        className={`nav-btn ${currentView === 'enrollment' ? 'active' : ''}`}
+                        onClick={() => {
+                            if (selectedStudent) {
+                                setCurrentView('enrollment');
+                                setEnrollmentMode('map');
+                                setViewMode('visual');
+                            } else {
+                                alert('Por favor selecciona un estudiante primero');
+                            }
+                        }}
+                        disabled={!selectedStudent}
                         style={{
-                            backgroundColor: '#10b981',
-                            borderColor: '#10b981',
-                            color: 'white'
+                            backgroundColor: currentView === 'enrollment' ? '#059669' : (selectedStudent ? '#10b981' : '#94a3b8'),
+                            borderColor: currentView === 'enrollment' ? '#059669' : (selectedStudent ? '#10b981' : '#94a3b8'),
+                            color: 'white',
+                            cursor: selectedStudent ? 'pointer' : 'not-allowed'
                         }}
                     >
-                        📚 Vista de Inscripción
+                        📚 Inscripción Visual
                     </button>
+                    {onBackToStudent && (
+                        <button 
+                            className="nav-btn"
+                            onClick={onBackToStudent}
+                            style={{
+                                backgroundColor: '#ef4444',
+                                borderColor: '#ef4444',
+                                color: 'white'
+                            }}
+                        >
+                            ← Vista Principal
+                        </button>
+                    )}
                 </div>
             </div>
 
@@ -198,6 +223,8 @@ const AdminPanel = ({ onBackToStudent }) => {
                             <ScheduleOverview 
                                 filters={activeFilters} 
                                 selectedStudent={selectedStudent}
+                                enrollmentMode={enrollmentMode}
+                                onCourseEnroll={handleCourseEnroll}
                             />
                         </div>
 

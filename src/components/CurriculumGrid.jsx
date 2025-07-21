@@ -7,7 +7,7 @@ import CourseEnrollmentModal from './CourseEnrollmentModal';
 import CourseRemovalModal from './CourseRemovalModal';
 import FailedCourseAlert from './FailedCourseAlert';
 
-const CurriculumGrid = () => {
+const CurriculumGrid = ({ studentData, isAdminMode = false, enrollmentMode = false, onCourseEnroll }) => {
     // Estados para materias aprobadas, reprobadas, no disponibles e inscritas
     const [passedCourses, setPassedCourses] = useState(new Set(
         coursesData.filter(c => c.gridCol <= 3).map(c => c.id) // Algunas materias ya aprobadas
@@ -93,6 +93,11 @@ const CurriculumGrid = () => {
         const newEnrolled = new Map(enrolledCourses);
         newEnrolled.set(course.id, { course, schedule });
         setEnrolledCourses(newEnrolled);
+        
+        // Comunicar la inscripción al componente padre (AdminPanel)
+        if (onCourseEnroll && typeof onCourseEnroll === 'function') {
+            onCourseEnroll(course);
+        }
         
         // Opcional: también marcar como no aprobada/reprobada si estaba en esos estados
         if (passedCourses.has(course.id)) {
